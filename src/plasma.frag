@@ -4,9 +4,12 @@ uniform vec2 resolution;
 uniform float time;
 
 void main() {
-  vec2 uv = gl_FragCoord.xy / resolution;
-  gl_FragColor.r = 0.1 + 0.1 * cos(cos(time) + uv.x + (uv.y * 3.0) * cos(time));
-  gl_FragColor.g = 0.1 + 0.1 * cos(cos(time) + (1.0-uv.x) + (uv.y * 2.2) * cos(time * 1.2));
-  gl_FragColor.b = 0.1 + 0.1 * cos(cos(time) + uv.x + ((1.0-uv.y) * 1.7) * cos(time * 2.7));
-  gl_FragColor.a = 1.0;
+  float checkerSize = 32.0;
+  vec2 uv = gl_FragCoord.xy + vec2(gl_FragCoord.y*0.005 * cos(gl_FragCoord.x*0.1 + 4.0 * time), gl_FragCoord.x*0.005 * cos(gl_FragCoord.y*0.15 + 7.0 * time));
+  vec2 point = (uv.xy + vec2(-10.0 * time, 10.0 * time)) / checkerSize;
+  if (mod(floor(point.x) + floor(point.y), 2.0) < 1.0) {
+    gl_FragColor = vec4(0.28, 0.28, 0.28, 1.0);
+  } else {
+    gl_FragColor = vec4(0.25, 0.25, 0.25, 1.0);
+  }
 }
