@@ -1,7 +1,7 @@
 import twgl from 'twgl.js';
 import './app.css';
-import vs from './plasma.vert';
-import ps from './plasma.frag';
+import vs from './checker.vert';
+import ps from './checker.frag';
 
 const gl = twgl.getWebGLContext(document.getElementById('gl'));
 const programInfo = twgl.createProgramInfo(gl, [vs, ps]);
