@@ -8185,18 +8185,18 @@
 	
 	__webpack_require__(300);
 	
-	var _plasma = __webpack_require__(304);
+	var _checker = __webpack_require__(304);
 	
-	var _plasma2 = _interopRequireDefault(_plasma);
+	var _checker2 = _interopRequireDefault(_checker);
 	
-	var _plasma3 = __webpack_require__(305);
+	var _checker3 = __webpack_require__(305);
 	
-	var _plasma4 = _interopRequireDefault(_plasma3);
+	var _checker4 = _interopRequireDefault(_checker3);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var gl = _twgl2.default.getWebGLContext(document.getElementById('gl'));
-	var programInfo = _twgl2.default.createProgramInfo(gl, [_plasma2.default, _plasma4.default]);
+	var programInfo = _twgl2.default.createProgramInfo(gl, [_checker2.default, _checker4.default]);
 	
 	var arrays = {
 	  position: [-1, -1, 0, 1, -1, 0, -1, 1, 0, -1, 1, 0, 1, -1, 0, 1, 1, 0]
@@ -16793,7 +16793,7 @@
 	
 	
 	// module
-	exports.push([module.id, "html, body {\r\n  margin: 0;\r\n  height: 100%;\r\n}\r\n\r\n#gl {\r\n  width: 100%;\r\n  height: 100%;\r\n  background-color: blue;\r\n}\r\n", ""]);
+	exports.push([module.id, "html, body {\n  margin: 0;\n  height: 100%;\n}\n\n#gl {\n  width: 100%;\n  height: 100%;\n}\n", ""]);
 	
 	// exports
 
@@ -17116,7 +17116,7 @@
 /* 305 */
 /***/ function(module, exports) {
 
-	module.exports = "precision mediump float;\n\nuniform vec2 resolution;\nuniform float time;\n\nvoid main() {\n  vec2 uv = gl_FragCoord.xy / resolution;\n  gl_FragColor.r = 0.1 + 0.1 * cos(cos(time) + uv.x + (uv.y * 3.0) * cos(time));\n  gl_FragColor.g = 0.1 + 0.1 * cos(cos(time) + (1.0-uv.x) + (uv.y * 2.2) * cos(time * 1.2));\n  gl_FragColor.b = 0.1 + 0.1 * cos(cos(time) + uv.x + ((1.0-uv.y) * 1.7) * cos(time * 2.7));\n  gl_FragColor.a = 1.0;\n}\n"
+	module.exports = "precision mediump float;\n\nuniform vec2 resolution;\nuniform float time;\n\nvoid main() {\n  float checkerSize = 32.0;\n  vec2 uv = gl_FragCoord.xy + vec2(gl_FragCoord.y*0.005 * cos(gl_FragCoord.x*0.1 + 4.0 * time), gl_FragCoord.x*0.005 * cos(gl_FragCoord.y*0.15 + 7.0 * time));\n  vec2 point = (uv.xy + vec2(-10.0 * time, 10.0 * time)) / checkerSize;\n  if (mod(floor(point.x) + floor(point.y), 2.0) < 1.0) {\n    gl_FragColor = vec4(0.28, 0.28, 0.28, 1.0);\n  } else {\n    gl_FragColor = vec4(0.25, 0.25, 0.25, 1.0);\n  }\n}\n"
 
 /***/ }
 /******/ ]);
